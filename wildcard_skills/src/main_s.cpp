@@ -1,6 +1,6 @@
 /* //TODO: my bio hw
 TODO: Create an autonomous program (pull start from main_c)
-TODO: Disable auton after a minute
+//TODO: Disable auton after a minute
 //TODO: Create a switch ui for the driver (or me or whoever's doing skills)
 */
 #pragma region VEXcode Generated Robot Configuration
@@ -294,7 +294,7 @@ void autonomous(){
   TC(goTile(1));
 
 }
-//! i hope it works :O
+
 int main() {
   //Initialize rand() DO NOT REMOVE
   vexcodeInit();
