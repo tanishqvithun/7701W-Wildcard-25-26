@@ -1,2 +1,5 @@
 **/.DS_Store
 **/.vscode
+# DO NOT MERGE THESE INTO **/.gitignore THAT WILL REMOVE THIS GITIGNORE
+wildcard_comp/.gitignore
+wildcard_skills/.gitignore
