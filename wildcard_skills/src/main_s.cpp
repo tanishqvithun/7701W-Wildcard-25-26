@@ -191,6 +191,28 @@ bool divineGeneralMahoraga = false;  //! OBLITERATE (literlly decimates the code
 
 
 //* Misc functions to call later 
+void buffer() {
+  //! The legendary fake init function that does nothing
+  //* but gives time to setup -- robot experiences inconsistent communication issues when removed
+  timer t;
+  t.reset();
+  int i = 0;
+
+  while (t.time(sec) <= bufferS) {
+    //Simple loading animation just for filler
+  Brain.Screen.setCursor(1,1);
+  Brain.Screen.print("Parthogenesis.init()");    
+    string dots = string(i, '.');
+    Brain.Screen.print(dots.c_str());
+    i = (i + 1) % 4;
+    wait(250, msec);
+    Brain.Screen.clearScreen();
+    Brain.Screen.setCursor(1,21);
+  }
+  //Remove loading text after buffer completed
+  screenReset();
+}
+
 void driveSetup() {
   // Motor setup
   Drivetrain.setDriveVelocity(driveSpeed, percent);
