@@ -1,5 +1,6 @@
 /* //TODO: my bio hw
 TODO: Create an autonomous program (pull start from main_c)
+TODO: Disable auton after a minute
 //TODO: Create a switch ui for the driver (or me or whoever's doing skills)
 */
 #pragma region VEXcode Generated Robot Configuration
@@ -204,6 +205,16 @@ void stopAllMotors() {
   Drivetrain.stop();
 }
 
+void go(double distance) {
+  // Simplifies below function to simply go(distance);
+  Drivetrain.driveFor(forward, distance,mm);
+}
+
+void tileGo(int tilecount) {
+  //an alternative go(distance) tht deals in tiles rather mm
+  Drivetrain.driveFor(forward,tilecount*tile,mm);
+}
+
 //* UI on brain to allow autonomous or driving selection
 void ui() {
   screenReset();
@@ -269,7 +280,8 @@ void autonomous(){
   RemoteControlCodeEnabled = false;
   screenReset();
   Brain.Screen.print("Autonomous Initialized");
-  
+  Drivetrain.driveFor(tile,mm);
+
 
 }
 
