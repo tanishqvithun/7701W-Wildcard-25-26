@@ -149,15 +149,20 @@ int rc_auto_loop_function_Controller1() {
   return 0;
 }
 
-// A flag checking for whether a function has run for a minute
+// Define a continuous timer to check 
+// dig in you butt twin
 timer t;
+
+// A flag checking for whether a function has run for a minute
 bool minute(){
   return t.time(sec)<=60;
 }
+
 // Initialise the controller task --> Controller1
 task rc_auto_loop_task_Controller1(rc_auto_loop_function_Controller1);
 
 #pragma endregion VEXcode Generated Robot Configuration
+
 /* #region project info */
 /*----------------------------------------------------------------------------*/
 /*                                                                            */
@@ -178,7 +183,8 @@ const int counterSpeed = 100;             // Counter motor speed
 const int turnSpeed = 50;                // Drivetrain turning speed
 const int tile = 600;                   // One tile distance in mm 
 const int driveSpeed = 100;            // Drivetrain speed
-bool autonFlag = false;
+bool autonFlag = false;               // Check for autonomous or driving control
+
 
 //* Misc functions to call later 
 void driveSetup() {
@@ -210,10 +216,11 @@ void go(double distance) {
   Drivetrain.driveFor(forward, distance,mm);
 }
 
-void tileGo(int tilecount) {
-  //an alternative go(distance) tht deals in tiles rather mm
+void goTile(int tilecount) {
+  //an alternative go(distance) that deals in tiles rather mm
   Drivetrain.driveFor(forward,tilecount*tile,mm);
 }
+
 
 //* UI on brain to allow autonomous or driving selection
 void ui() {
@@ -275,22 +282,24 @@ void drive() {
   return;
 }
 
-void autonomous(){
-  wait(50,msec);
-  RemoteControlCodeEnabled = false;
-  screenReset();
-  Brain.Screen.print("Autonomous Initialized");
-  Drivetrain.driveFor(tile,mm);
+//Macro for running code after every line
+#define TC(x) do {x; if (minute()) return;} while(false);
 
+void autonomous(){
+  TC(wait(50,msec));
+  TC(RemoteControlCodeEnabled = false);
+  TC(screenReset());
+  TC(Brain.Screen.print("Autonomous Initialized"));
+  TC(goTile(1));
 
 }
-
+//! i hope it works :O
 int main() {
   //Initialize rand() DO NOT REMOVE
   vexcodeInit();
   
   //Begin Project Code
-  ui();                             //Ask user which program to run
+  ui();                                //Ask user which program to run
   t.reset();
   //Decide on either auton or driver control based on controller input
   while (true){
