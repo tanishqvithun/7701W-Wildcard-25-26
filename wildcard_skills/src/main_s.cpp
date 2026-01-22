@@ -224,7 +224,7 @@ void ui() {
       break;
     } else if (Controller1.ButtonDown.pressing() == true){
       Brain.Screen.print("RIGHT pressed; auton init...");
-      autonFlag == true;
+      autonFlag = true;
       break;
     }
   }
@@ -291,6 +291,7 @@ int main() {
   // More understandable implement //!(maybe unnecesarily complex)
   timer t;
   t.reset();
+  //Decide on either auton or driver control based on controller input
   while (true){
     if (autonFlag == true && t.time(sec) <= 60){
       drive();
@@ -299,6 +300,7 @@ int main() {
       autonomous();
       
     }
+    // Once the timer is up exit the loop and end the program
     else {
       break;
     }
